@@ -52,8 +52,8 @@ avg_vec_diff = np.sum(avg_vec_host - avg_vec_device)
 man_diff = man_host - man_device
 euc_diff = euc_host - euc_device
 
-print('Suma de errores en la operación suma: {}'.format(sum_vec_diff))
-print('Suma de errores en la operación promedio: {}'.format(avg_vec_diff))
-print('Distancia de Manhattan. Host: {:2.f} - Device: {} - Diff: {:.2f}'.format(man_host, man_device, man_diff))
-print('Distancia euclideana. Host: {:2.f} - Device: {} - Diff: {:.2f}'.format(euc_host, euc_device, euc_diff))
+print('Suma de errores en la operación suma: {:.2f}'.format(sum_vec_diff))
+print('Suma de errores en la operación promedio: {:.2f}'.format(avg_vec_diff))
+print('Distancia de Manhattan. Host: {:2.f} - Device: {:.2f} - Diff: {:.2f}'.format(man_host, man_device, man_diff))
+print('Distancia euclideana. Host: {:2.f} - Device: {:.2f} - Diff: {:.2f}'.format(euc_host, euc_device, euc_diff))
 
