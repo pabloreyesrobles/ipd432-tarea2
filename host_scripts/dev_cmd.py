@@ -40,17 +40,26 @@ def cmd_to_dev(cmd, bram=None, com=None):
       data = ser.read(1024)
       return np.array(list(data))
     elif cmd == 'sumVec':
-      data = np.array(list(ser.read(2048)), dtype=np.uint16).reshape(1024, 2)
-      return (data[:, 0] << 8) + data[:, 1]
+      data = np.array(list(ser.read(1024)), dtype=np.uint8)
+      return data
     elif cmd == 'avgVec':
-      data = np.array(list(ser.read(2048)), dtype=np.uint16).reshape(1024, 2)
-      return data[:, 0] + (data[:, 1] >> 7) / 2.0
+      data = np.array(list(ser.read(1024)), dtype=np.uint8)
+      return data
     elif cmd == 'manDist':
-      data = np.array(list(ser.read(3)), dtype=np.int32)
-      return ((data[0] << 16) + (data[1] << 8) + data[2])
-    else: # eucDist
-      data = np.array(list(ser.read(2)), dtype=np.int32)
-      return ((data[0] << 8) + data[1])
+      data = int.from_bytes(ser.read(1), byteorder='big')
+      return data
+    # elif cmd == 'sumVec':
+    #   data = np.array(list(ser.read(2048)), dtype=np.uint16).reshape(1024, 2)
+    #   return (data[:, 0] << 8) + data[:, 1]
+    # elif cmd == 'avgVec':
+    #   data = np.array(list(ser.read(2048)), dtype=np.uint16).reshape(1024, 2)
+    #   return data[:, 0] + (data[:, 1] >> 7) / 2.0
+    # elif cmd == 'manDist':
+    #   data = np.array(list(ser.read(3)), dtype=np.int32)
+    #   return ((data[0] << 16) + (data[1] << 8) + data[2])
+    # else: # eucDist
+    #   data = np.array(list(ser.read(2)), dtype=np.int32)
+    #   return ((data[0] << 8) + data[1])
 
 # La función de escritura sobre una BRAM a diferencia de cmd_to_dev
 # requiere de la especificación del bloque objetivo
